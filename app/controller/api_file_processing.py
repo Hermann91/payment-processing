@@ -10,12 +10,6 @@ def upload_file():
     file = request.files['file']
     if file and allowed_file(file.filename):
         filename = file.filename
-        make_response(
-            jsonify(
-                {"message": f"Arquivo em processamento: {filename} "}
-            ),
-            200,
-        )
         try:
             main_csv_processing(file)
         except Exception as error:
