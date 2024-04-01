@@ -35,7 +35,7 @@ Acesse a API usando um cliente HTTP (por exemplo, cURL, Postman, etc.) para envi
 
 http://127.0.0.1:5000/api/v1/procesing-csv-file
 
-## executar via docker (no terminal vai até a pasta raiz do projeto e digiteos comandos abaixo):
+## executar via docker (no terminal vai até a pasta raiz do projeto e digite os comandos abaixo):
 
 docker build -t payments .
 
