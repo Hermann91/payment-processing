@@ -10,8 +10,9 @@ def upload_file():
     file = request.files['file']
     if file and allowed_file(file.filename):
         filename = file.filename
+        file_read = file.read(file)
         try:
-            main_csv_processing(file)
+            main_csv_processing(file_read)
         except Exception as error:
             return make_response(
                 jsonify(
