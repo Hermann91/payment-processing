@@ -2,7 +2,7 @@ from flask import request, jsonify, make_response
 
 from app import app
 from app.blueprints.payment_processing import main_csv_processing
-from app.controller.file_permission import allowed_file
+from app.blueprints.file_permission import allowed_file
 
 
 @app.route('/api/v1/procesing-csv-file', methods=['GET', 'POST'])
@@ -10,6 +10,12 @@ def upload_file():
     file = request.files['file']
     if file and allowed_file(file.filename):
         filename = file.filename
+        make_response(
+            jsonify(
+                {"message": f"Arquivo em processamento: {filename} "}
+            ),
+            200,
+        )
         try:
             main_csv_processing(file)
         except Exception as error:
