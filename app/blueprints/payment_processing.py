@@ -1,9 +1,7 @@
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from app.blueprints.ticket_generator import TicketGenerator
-from app.blueprints.sender_email import EmailSender
 import pandas as pd
+
+from app.blueprints.sender_email import EmailSender
+from app.blueprints.ticket_generator import TicketGenerator
 
 
 def extract_email_list(data_frame_email_list):
