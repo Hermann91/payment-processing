@@ -19,22 +19,23 @@ def send_email(recipient_email, boleto):
     EmailSender().send_email(recipient_email, boleto)
 
 
+def process_email(email, data_frame):
+    try:
+        boleto = ticket_generator(data_frame)
+        send_email(email, boleto)
+    except Exception as error:
+        print(f"Errro ao processar arquivo, Error: {error}")
+
+
 def main_csv_processing(csv_file):
     data_frame = pd.read_csv(csv_file)
     email_list = extract_email_list(data_frame)
     threads = []
 
     for email in email_list:
-        # Cria uma nova thread para processar cada email
         thread = threading.Thread(target=process_email, args=(email, data_frame))
         threads.append(thread)
         thread.start()
 
     for thread in threads:
         thread.join()
-
-
-def process_email(email, data_frame):
-    boleto = ticket_generator(data_frame)
-    send_email(email, boleto)
-

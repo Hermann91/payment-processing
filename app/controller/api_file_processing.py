@@ -9,17 +9,7 @@ from app.blueprints.file_permission import allowed_file
 def upload_file():
     file = request.files['file']
     if file and allowed_file(file.filename):
-        filename = file.filename
-        try:
-            main_csv_processing(file)
-        except Exception as error:
-            return make_response(
-                jsonify(
-                    {"message": f"Falha ao procesar arquivo: {filename} error: {error}"}
-                ),
-                500,
-            )
-
+        main_csv_processing(file)
     else:
         return make_response(
             jsonify(
@@ -27,3 +17,11 @@ def upload_file():
             ),
             401,
         )
+    return make_response(
+            jsonify(
+                {"message": "Arquivo processado"}
+            ),
+            200,
+        )
+
+
